@@ -5,7 +5,7 @@ factorial :: Int -> Int
 factorial 0 = 1 
 factorial n = n * factorial (n-1)
 --Ejercicio 2 : Igualdad de expresiones
-isEqual :: Float -> Float -> Boll
+isEqual :: Float -> Float -> Bool
 isEqual x y = x == y 
 --Ejercicio 3 
 secondChar :: String -> Char 
@@ -39,3 +39,11 @@ intAlist :: Int -> [Int]
 intAlist n
  | div n 10 > 0 = (intAlist (div n 10)) ++ [(mod n 10)]
  | div n 10 == 0 = [] ++ [mod n 10]
+
+
+--Ejercicio 9 f1 == drop, f2 == take
+cortar ::Int -> Int -> [a] -> (Int -> [a] -> [a]) -> (Int -> [a] -> [a]) -> [a]
+cortar i j w f1 f2 = f2 (j-i) (f1 i w) 
+
+cortar' :: Int -> Int -> [a] -> [a]
+cortar' i j w= drop i (take j w) 
