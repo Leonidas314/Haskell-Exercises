@@ -46,10 +46,10 @@ cortar ::Int -> Int -> [a] -> (Int -> [a] -> [a]) -> (Int -> [a] -> [a]) -> [a]
 cortar i j w f1 f2 = f2 (j-i) (f1 i w) 
 
 cortar' :: Int -> Int -> [a] -> [a]
-cortar' i j w= drop i (take j w) 
+cortar' i j w = drop i (take j w) 
 
 -- Main.hs
 
 main :: IO ()
 main = do
-	print "Hola Mundo"
+ print "Hola Mundo"
