@@ -22,12 +22,6 @@ maxTres x y z
  | x >= y && x >= z = x
  | y >= z && y >= x = y 
  | otherwise = z
---Alternativa recursiva
-maxTresAlt :: Int -> Int -> Int -> Int
-maxTresAlt x y z
- | x >= maxTresAlt x y z = x
- | y >= maxTresAlt x y z = y
- | otherwise  = z
 
 absolute :: Int -> Int
 absolute x 
@@ -44,3 +38,9 @@ tomar n (x:xs) = [x] ++ (tomar (n-1) (xs))
 dejar :: Int -> [a] -> [a]
 dejar 0 (x:xs) = [x] ++ xs
 dejar n (x:xs) = [] ++ dejar (n-1) (xs)
+
+edad :: (Num a) => (a,a,a) -> (a,a,a) -> a
+edad (d1,m1,a1) (d2,m2,a2)  = a1-a2
+
+edad' :: Int  => (a,a,a) -> (a,a,a) -> a
+edad' (d1,m1,a1) (d2,m2,a2)  = a1-a2
