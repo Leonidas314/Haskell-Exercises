@@ -28,7 +28,7 @@ mult6 :: ([Int] -> Bool) -> ([Int] -> Bool) -> [Int] -> Bool
 mult6 f1 f2 l = f1 l == f2 l
 
 
---Funcion reverse alternativa
+--Funcion reverse alternativa por Alvaro
 reversa :: [a] -> [a]
 reversa [] = []
 reversa (x : xs) = reversa xs ++ [x] 

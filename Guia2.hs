@@ -67,3 +67,8 @@ esPrimo n = [x | x <- [2..n] , mod n x == 0] == [n]
  naturales-}
 listaDePrimos :: Int -> [Int]
 listaDePrimos n =[x | x <- [2..n] , esPrimo x]
+
+--Defina una funcion que dada una lista retorne la inversa de la misma por Leon
+invertirLista :: [a] -> [a]
+invertirLista [] = []
+invertirLista (x:xs) = invertirLista xs ++ [x]
