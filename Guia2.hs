@@ -55,9 +55,15 @@ xor True True = False
 conjuncion :: Bool -> Bool -> Bool
 conjuncion False x = False  
 conjuncion True x = x 
+--Funcion biImplicación Ejemplo:
+biImplication :: Bool -> Bool -> Bool
+biImplication p q = p==q
+
  --Ejercicio8 Defina una fucion que dado un numero natural defina si es primo o no
 esPrimo :: Int -> Bool
 esPrimo n = [x | x <- [2..n] , mod n x == 0] == [n] 
 
-biImplication :: Bool -> Bool -> Bool
-biImplication p q = p==q
+{-Ejercicio9 Defina una función que dado un número naturale n, retorne la lista de todos los primos 
+ naturales-}
+listaDePrimos :: Int -> [Int]
+listaDePrimos n =[x | x <- [2..n] , esPrimo x]
