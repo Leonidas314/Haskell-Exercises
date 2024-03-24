@@ -92,3 +92,11 @@ palindromos :: String -> Bool
 palindromos [] = True 
 palindromos [x] = True
 palindromos (x:xs) = x == last xs && palindromos (init xs) 
+
+--Ejercicio13 defina una funcion que dados los coheficientes de una ecuacion cuadratica xa²+bx+c = 0
+--devuelva la cantidad de raices reales de la ecuacion
+
+realRoot :: Int -> Int -> Int -> Int 
+realRoot a b c 
+ | b*b - 4 * a * c >= 0 = 2
+ | b*b - 4 * a * c < 0 = 0
