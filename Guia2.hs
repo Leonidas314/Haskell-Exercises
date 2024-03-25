@@ -3,6 +3,7 @@
 --head retorna el primer elemento de una lista
 head' :: [a] -> a
 head' (x:xs) = x 
+--head' (x:-) = x -> Toma el primer de una lista e ignora el resto
 --tail retorna toda la lista menos el primer elemento
 tail' :: [a] -> [a]
 tail' (x:xs) = xs
@@ -26,8 +27,12 @@ maxTres x y z
  | otherwise = z
 
 --Ejercicio 4 definir las funciones concatenar, tomar , dejar y agregar al final
-concatenar :: [a] -> [a] -> [a]
-concatenar a b = a ++ b
+
+conc :: [a] -> [a] -> [a]
+conc [] y = y 
+conc x [] = x
+conc [z] y = z : y
+
 
 tomar :: Int -> [a] -> [a]
 tomar 0 (x:xs) = []
@@ -48,8 +53,12 @@ absolute x
  |otherwise = -x
 
 --Ejercicio 6 (Pendiente)
-edad :: (Num a) => (a,a,a) -> (a,a,a) -> a
-edad (d1,m1,a1) (d2,m2,a2)  = a1-a2
+edad :: (Num a, Eq a, Ord a) => (a,a,a) -> (a,a,a) -> a
+edad (d1,m1,a1) (d2,m2,a2) 
+ |((m2==m1) && (d2 >= d1)) = (a2 - a1)
+ | m2 == m1 && (d2< d1) = (a2 - a1) - 1
+ | m2 > m1 = a2 - a1
+ |otherwise = (a2 - a1) - 1
 
 --Ejercicio 7 : Definir  la funcion xor : disyunción exclusiva
 
@@ -57,6 +66,9 @@ xor :: Bool -> Bool -> Bool
 xor False x = x
 xor x False = x 
 xor True True = False
+
+xor' :: Bool -> Bool -> Bool
+xor' x y = not (x==y)
 
 --Ejemplo De funcion de conjuncion logica
 conjuncion :: Bool -> Bool -> Bool
