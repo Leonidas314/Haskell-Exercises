@@ -1,3 +1,5 @@
+import Data.Char
+import Data.IntSet
 --Definir una funcion que toma una secuencia y decir si todos sus digitos son pares
 secuenciaPar :: [Int] -> Bool
 secuenciaPar [] = True
@@ -22,3 +24,22 @@ selectionSort (x:y:xs)
  |x<y = x : selectionSort(y:xs)
  |x>y && xs ==[] = y : [x]
  |x<y && xs == [] = x : [y]
+
+--Define a function that gives the  maximun of a list of integers. Use the predefined function max
+maxOfaList :: [Int] -> Int
+maxOfaList [] = 0
+maxOfaList [x] = x
+maxOfaList (x:xs) = max x (maxOfaList xs) 
+
+--Define a function that returns the first ocurrence of an integer m in a list of integers
+
+firstOcurrence :: Int ->[Int] -> Int
+firstOcurrence m [] = error "empty list"
+firstOcurrence m (x:xs) 
+ | m==x =  x
+ | otherwise = firstOcurrence m xs
+
+--Define a function that removes the first ocurrence of an integer m
+removeFirst :: Int -> [Int] -> [Int]
+removeFirst m [] = []
+removeFirst m (x:xs)  |m==x = xs | otherwise = x : removeFirst m xs 
