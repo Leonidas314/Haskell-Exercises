@@ -61,12 +61,12 @@ edad (d1,m1,a1) (d2,m2,a2)
  |otherwise = (a2 - a1) - 1
 
 --Ejercicio 7 : Definir  la funcion xor : disyunción exclusiva
-
+--Con tabla de verdad
 xor :: Bool -> Bool -> Bool 
 xor False x = x
 xor x False = x 
 xor True True = False
-
+--Con estilo
 xor' :: Bool -> Bool -> Bool
 xor' x y = not (x==y)
 
