@@ -43,3 +43,14 @@ firstOcurrence m (x:xs)
 removeFirst :: Int -> [Int] -> [Int]
 removeFirst m [] = []
 removeFirst m (x:xs)  |m==x = xs | otherwise = x : removeFirst m xs 
+
+--minimo de una lista de integers
+
+mnmInt :: [Int] -> Int
+mnmInt [] = error "empty list"
+mnmInt [x] = x
+mnmInt (x:xs) = min x (mnmInt xs)
+
+srtInts :: [Int]->[Int]
+srtInts []=[]
+srtInts xs = m : (srtInts (removeFirst (m) (xs))) where m = mnmInt xs 
