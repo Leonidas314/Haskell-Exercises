@@ -75,11 +75,35 @@ blowup (x:xs) = [x] ++ triplicate xs
 --Exercise 1.15 Write a function srtString that sorts a sring in alphabetical order
 --For this we need to obtain te minimun Char in a list
 --And we modify the removeFirst's identity to a polimorfic function
-minChar ::(Ord a ) => [a]-> a 
---minChar [] = undefined
+minChar ::[Char] -> Char
+minChar [] = 'p'
 minChar [x] = x
 minChar (x:xs) = min x (minChar xs)
 
-srtString ::(Eq a, Ord a) => [a] -> [a]
+srtString ::String -> String
 srtString [] = []
-srtString (x:xs)= m : (srtString (removeFirst (m) (xs))) where m = minChar xs
+srtString xs= m : (srtString (removeFirst (m) (xs))) where m = minChar xs
+
+--Example 1.16 : Suppose we want to check wheter a string srt1 is a prefix of a str2. Then the answer to the question should be true or false i.e. the type declaration for prefix should run: prefix :: String -> String -> Bool.
+{-
+Prefix of a string ys are defined as follows:
+[] is a prefix of ys 
+if xs is a prefix of ys , then x:xs is a prefix of x:ys 
+nothing else is a prefix of ys.
+-}
+
+prefix :: String -> String -> Bool
+prefix [] ys = True
+prefix (x:xs) [] = False
+prefix (x:xs) (y:ys) = x==y && prefix xs ys
+
+--1.17 Write a function  substring :: String -> String -> Bool that checks wheter str1 is a substring of str2 
+{-The substring  of an arbitrary string ys  are given by :
+1. if xs is a prefix of ys , xs is a substring
+2. if ys is equals y:ys' and xs is a substring of ys', xs is a subtring of ys 
+3. nothing else is a substring of ys 
+-}
+substring :: String -> String -> Bool 
+substring [] ys = True
+substring xs [] = False
+substring xs (y:ys) = xs == (y:ys) || substring xs ys
