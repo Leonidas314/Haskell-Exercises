@@ -12,17 +12,27 @@ secuenciaPar' (x:xs)
  | ((mod x 2) == 0) = secuenciaPar'(xs)
  | otherwise = False 
 
---Ordenar una lista probar selection sort, elegir el mas chico y ponerlo primero
+-----------Hacer SuperPar: definir una funcion que diga si todos  los digitos de un numero son pares
 
-selectionSort ::(Eq a, Ord a)=>[a] -> [a]
-selectionSort [] = []
-selectionSort [x] = [x]
-selectionSort (x:y:xs)
- |x>y = selectionSort (y:x:xs)
- |x<y = x : selectionSort(y:xs)
- |x>y && xs ==[] = y : [x]
- |x<y && xs == [] = x : [y]
 
+--Exercise 1.3 remake the div function manually
+divides :: Int -> Int -> Bool
+divides n d = rem d n == 0
+
+--Exercise 1.3 a : Define the function ldf k n , that returns the number that is greater than k and the last divisor of n, use divides function
+
+ldf :: Int -> Int -> Int 
+ldf k n 
+ | divides k n = k
+ | k^2 > n = n 
+ | otherwise = ldf (k+1) n 
+
+--Another way to do prime list from 2 to m
+
+prime0 :: Int -> Bool
+prime0 n 
+ | n<2 =False
+ | otherwise = ldf 2 n == n
 --Define a function that gives the  maximun of a list of integers. Use the predefined function max
 maxOfaList :: [Int] -> Int
 maxOfaList [] = 0
@@ -107,3 +117,4 @@ substring :: String -> String -> Bool
 substring [] ys = True
 substring xs [] = False
 substring xs (y:ys) = xs == (y:ys) || substring xs ys
+
