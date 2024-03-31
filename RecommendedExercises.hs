@@ -1,10 +1,10 @@
---Definir una funcion que toma una secuencia y decir si todos sus digitos son pares
+--Define a function that evalues if all the elements of a list are even numbers
 secuenciaPar :: [Int] -> Bool
 secuenciaPar [] = True
 secuenciaPar (x:xs) = (mod x 2 == 0) && (secuenciaPar (xs))
 
 
---Alternativa combinando pattenr matching y guards
+--An alternative answer with pattenr matching and guards combination
 secuenciaPar' :: [Int] -> Bool
 secuenciaPar' [] = True 
 secuenciaPar' (x:xs)
@@ -12,8 +12,11 @@ secuenciaPar' (x:xs)
  | ((mod x 2) == 0) = secuenciaPar'(xs)
  | otherwise = False 
 
------------Hacer SuperPar: definir una funcion que diga si todos  los digitos de un numero son pares
+--Superpar: Make a function that determines whether all digits of a int number are even numbers
 
+superpar :: Int -> Bool
+superpar 0 = True
+superpar n =  mod n 2 == 0 && superpar(div n 10) 
 
 --Exercise 1.3 remake the div function manually
 divides :: Int -> Int -> Bool
@@ -90,6 +93,7 @@ minChar [] = 'p'
 minChar [x] = x
 minChar (x:xs) = min x (minChar xs)
 
+--Sorting Strings
 srtString ::String -> String
 srtString [] = []
 srtString xs= m : (srtString (removeFirst (m) (xs))) where m = minChar xs
@@ -116,5 +120,5 @@ prefix (x:xs) (y:ys) = x==y && prefix xs ys
 substring :: String -> String -> Bool 
 substring [] ys = True
 substring xs [] = False
-substring xs (y:ys) = xs == (y:ys) || substring xs ys
+substring xs (y:ys) = xs == (y:ys) || prefix xs (y:ys) || substring xs ys
 
