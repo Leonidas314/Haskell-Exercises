@@ -28,3 +28,33 @@ listOflengthList l = [x | x <- map length l]
 sumLengths :: [[a]] -> Int 
 sumLengths [] = 0
 sumLengths (x:xs) = length x + sumLengths xs
+
+
+--Remove ocurrence from a list of list
+
+removeOcurrence :: (Eq a) =>[a] -> [[a]] -> [[a]]
+removeOcurrence _ [] = []
+removeOcurrence y x = filter (/=(y)) (x) --ONE HOUR FOR A COUPLE OF PARENTHESIS 
+
+
+
+
+--Alvaro's exercise: Sort a list of list by the length of its elements
+
+minLengthElement :: [[a]] ->  [a]
+minLengthElement [] = []
+minLengthElement [x] = x 
+minLengthElement (x:y:xs)
+ | length x <= length y = minLengthElement(x:xs)
+ | length y <= length x = minLengthElement(y:xs) --Ready to go!
+
+removeFirstOcurrence ::(Eq a) => [a] -> [[a]] -> [[a]]
+removeFirstOcurrence _ [] = []
+removeFirstOcurrence y (x:xs) 
+ | y == x = xs
+ |otherwise = x : removeFirstOcurrence y xs --Ready to go! 
+
+
+sortList ::(Eq a) => [[a]] -> [[a]]
+sortList [] = []
+sortList (xs) = m : sortList((removeFirstOcurrence m (xs))) where m = minLengthElement (xs)
