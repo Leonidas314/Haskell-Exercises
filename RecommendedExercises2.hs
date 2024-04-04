@@ -32,17 +32,22 @@ removefirstInt(x:xs)
  | isDigit x = removefirstInt (xs)
  | otherwise = (x:xs)  --Ready to go!
 
+removeOperator :: String -> String
+removeOperator [] = []
+removeOperator (x:xs)
+ | (x == '*') || (x == '/') = xs
+ |otherwise = []
 --back to the main function ...
 
 --How i know if the next char is a operator "*" or "/"?
 
 
 reduction :: String -> Int 
-reduction [] = 1
-reduction (x:xs)    
- |not(isDigit x) && (tail(x:xs)==xs)= listToInt(listFirstInt xs) --Ultimo Caso la cola tail es igual al listFirstInt, x no es digit
- |isDigit x && (head(removefirstInt (x:xs))=='*')=listToInt(listFirstInt(x:xs)) * (reduction(tail(removefirstInt(x:xs))))
- |otherwise = reduction []
+reduction [] = 3
+reduction (x:xs)  
+ |isDigit x && removefirstInt (x:xs) == "" = listToInt(listFirstInt(x:xs))
+ |isDigit x && (head(removefirstInt (x:xs))=='*')= listToInt(listFirstInt(x:xs)) * reduction(removeOperator(removefirstInt(x:xs)))
+ |otherwise = reduction[]  -- listToInt(listFirstInt (x:xs))
 
 --Error Prelude head = empty list... el error ocurre en la comparacion del head de la lista con el operador "*", llega la lista vacia.
---Creo que lo puedo resolver con una funcion que remueva el operador "*" luego de la evaluacion del mismo.
+--Creo que lo puedo resolver con una funcion que remueva el operador "*" luego de la evaluacion del mismo.z
