@@ -43,11 +43,13 @@ removeOperator (x:xs)
 
 
 reduction :: String -> Int 
-reduction [] = 3
+reduction [] = error "NaN"
 reduction (x:xs)  
  |isDigit x && removefirstInt (x:xs) == "" = listToInt(listFirstInt(x:xs))
  |isDigit x && (head(removefirstInt (x:xs))=='*')= listToInt(listFirstInt(x:xs)) * reduction(removeOperator(removefirstInt(x:xs)))
+ |isDigit x && (head(removefirstInt (x:xs))=='/')= listToInt(listFirstInt(x:xs)) `div` reduction(removeOperator(removefirstInt(x:xs)))
+ 
  |otherwise = reduction[]  -- listToInt(listFirstInt (x:xs))
-
+ 
 --Error Prelude head = empty list... el error ocurre en la comparacion del head de la lista con el operador "*", llega la lista vacia.
 --Creo que lo puedo resolver con una funcion que remueva el operador "*" luego de la evaluacion del mismo.z
