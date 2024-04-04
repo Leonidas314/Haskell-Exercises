@@ -1,35 +1,29 @@
---For the calculator's project: I need a function that recibe a String with a mathematical expression and returns the normal expresion on Int type
+--For the calculator's project: I need a function that recibe a String with a mathematical expression and returns the normal expresion on Float type
+
 import Data.Char (ord , isDigit)
 import Data.Ratio
---prod :: String -> Int 
---prod [] = 1
---prod (x:y:xs)
 
---Function that convert a String in a list of int if the char is a digit
-listFirstInt :: String -> [Int]
-listFirstInt [] = []
-listFirstInt (x:xs) 
- | isDigit x = (ord x - 48) : listFirstInt xs
- | otherwise = listFirstInt [] --Ready to go!
+--Function that convert the first numerical value into a list with the digits 
+listFirstFloat :: String -> [Float]
+listFirstFloat [] = []
+listFirstFloat (x:xs) 
+ | isDigit x = (fromIntegral(ord x) - 48) : listFirstFloat xs
+ | otherwise = listFirstFloat [] --Ready to go!
  
 --Function that convert a list of numbers in a integer
 
-listToInt :: [Int] -> Int 
-listToInt [x] = x
-listToInt xs = last xs + (10 * (listToInt (init (xs)))) --Ready to go!
+listToFloat :: [Float] -> Float
+listToFloat [x] = x
+listToFloat xs = last xs + (10 * (listToFloat (init (xs)))) --Ready to go!
 
---Now I need a main function that take a string and diference if the next operation is a multiplication or a ...
-{-
-reduction :: String -> Int 
-reduction [] = 1
-reduction (x:xs)-}
+--Now I need a main function that take a string and diference if the next operation is a multiplication or a division...
 
---Can i do a "removefirstInt" function with the same logic that  listFirstInt?
+--Can i do a "removefirstFloat" function with the same logic that  listFirstFloat?
 
-removefirstInt :: String -> String
-removefirstInt [] = []
-removefirstInt(x:xs)
- | isDigit x = removefirstInt (xs)
+removefirstFloat :: String -> String
+removefirstFloat [] = []
+removefirstFloat(x:xs)
+ | isDigit x = removefirstFloat (xs)
  | otherwise = (x:xs)  --Ready to go!
 
 removeOperator :: String -> String
@@ -39,17 +33,15 @@ removeOperator (x:xs)
  |otherwise = []
 --back to the main function ...
 
+
+
+--Now I need a main function that take a string and diference if the next operation is a multiplication or a division...
 --How i know if the next char is a operator "*" or "/"?
 
-
-reduction :: String -> Int 
-reduction [] = error "NaN"
+reduction :: String -> Float
+reduction [] = error "Invalid expression"
 reduction (x:xs)  
- |isDigit x && removefirstInt (x:xs) == "" = listToInt(listFirstInt(x:xs))
- |isDigit x && (head(removefirstInt (x:xs))=='*')= listToInt(listFirstInt(x:xs)) * reduction(removeOperator(removefirstInt(x:xs)))
- |isDigit x && (head(removefirstInt (x:xs))=='/')= listToInt(listFirstInt(x:xs)) `div` reduction(removeOperator(removefirstInt(x:xs)))
- 
- |otherwise = reduction[]  -- listToInt(listFirstInt (x:xs))
- 
---Error Prelude head = empty list... el error ocurre en la comparacion del head de la lista con el operador "*", llega la lista vacia.
---Creo que lo puedo resolver con una funcion que remueva el operador "*" luego de la evaluacion del mismo.z
+ |isDigit x && removefirstFloat (x:xs) == "" = listToFloat(listFirstFloat(x:xs))
+ |isDigit x && (head(removefirstFloat (x:xs))=='*')= listToFloat(listFirstFloat(x:xs)) * reduction(removeOperator(removefirstFloat(x:xs)))
+ |isDigit x && (head(removefirstFloat (x:xs))=='/')= listToFloat(listFirstFloat(x:xs)) / reduction(removeOperator(removefirstFloat(x:xs)))
+ |otherwise = reduction[]  
