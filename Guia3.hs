@@ -82,3 +82,34 @@ distanciaH (x:xs) (y:ys)
 
 square :: Float -> Bool
 square n = sqrt n -fromIntegral(floor ( sqrt n))  == 0
+
+--Exercise 8 Define una funcion de forma tal que dado un elemento z y un entero n, z aparece n veces en donde?
+
+repetidos :: a -> Int -> [a]
+repetidos _ 0 = []
+repetidos z n = z: repetidos z (n-1)
+
+--Exercise 9 Define la funcion nelem tal que nelem xs n es elemento en-ésimo de xs empezando a numerar desde el cero. por ejemplo 
+
+nelem :: [a] -> Int -> a
+nelem [] _ = error "Lista Vacia"
+nelem (x:xs) 0 = x
+nelem (x:xs) n = nelem xs (n-1)
+
+--Exercise 10 Define la funcion posicionesC tal que posicionesC xs c es la lista de las posiciones del caracter c een la cadena xs.
+
+posicionesC :: (Eq a) => [a] -> a -> [Int]
+posicionesC [] _ = []
+posicionesC (x:xs) c 
+ | x==c = 0 : map (+1) (posicionesC xs c) 
+ | otherwise = map (+1) (posicionesC xs c)
+
+--Exercice 11 Defina la funcion compact, dad una lista retorna la lista sin los elementos repetidos consecutivos 
+
+compact :: Eq a => [a] -> [a]
+compact [] = []
+compact (x:y:xs)
+ |x==y && xs ==[] = x:compact [] 
+ |x/=y && (xs==[]) = x:[y]
+ |x==y = compact (x:xs) 
+ | otherwise = x:compact (y:xs)
