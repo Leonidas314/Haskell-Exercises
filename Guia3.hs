@@ -112,4 +112,5 @@ compact (x:y:xs)
  |x==y && xs ==[] = x:compact [] 
  |x/=y && (xs==[]) = x:[y]
  |x==y = compact (x:xs) 
- | otherwise = x:compact (y:xs)
+ |otherwise = x:compact (y:xs)
+
