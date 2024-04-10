@@ -81,7 +81,7 @@ distanciaH (x:xs) (y:ys)
  --Exercise 7 Define la funcion que dado un número natural, decida si el mismo es un cuadrado perfecto o no
 
 square :: Float -> Bool
-square n = sqrt n -fromIntegral(floor ( sqrt n))  == 0
+square n = sqrt n - fromIntegral(floor ( sqrt n))  == 0
 
 --Exercise 8 Define una funcion de forma tal que dado un elemento z y un entero n, z aparece n veces en donde?
 
@@ -108,9 +108,19 @@ posicionesC (x:xs) c
 
 compact :: Eq a => [a] -> [a]
 compact [] = []
+compact [x] = [x]
 compact (x:y:xs)
  |x==y && xs ==[] = x:compact [] 
  |x/=y && (xs==[]) = x:[y]
  |x==y = compact (x:xs) 
  |otherwise = x:compact (y:xs)
+
+--Hacer Quick sort
+--1)Elegir un pivote: comunmente el primer elemento
+quicksort :: [Int] -> [Int]
+quicksort [] = []
+quicksort [x] =[x]
+quicksort (x:y:xs) 
+ | y<=x =  y : quicksort (x:xs)
+ | otherwise = quicksort(x:xs)++[y]
 
