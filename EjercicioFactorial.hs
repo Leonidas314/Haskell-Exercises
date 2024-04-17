@@ -24,9 +24,9 @@ factoriales_2 :: Int -> [Int]
 factoriales_2 n =
     reverse(aux(n+1) 0 [1]) --reverse esta demás con la siguiente def.
     where aux n m (x:xs) = if m == n 
-            then [] else
-                            if m/= n then factorial m: aux n (m+1) (x:xs)
-                             else error "NaN"
+            then xs else
+                          aux n (m+1) (factorial (m+1):(x:xs))
+                             --else error "NaN"
                              --No mentira geniooooo
 
 --Tercera solucion: Por listas de comprensión
@@ -42,11 +42,6 @@ factoriales_4 n = map factorial [0..n]
 acumulados de aplicar la funcion a la semilla y a los valores sucesivos-}
 
 -- Atencion! Las funciones definidas previamente NO son binarias 
-
-factbin :: Int -> Int -> Int
-factbin 0 _ = 1
-factbin 1 _ = 1
-factbin n _ = n* factbin (n-1) 0  
 
 factoriales_5 :: Int -> [Int]
 factoriales_5 n = scanl (*) 1 [1..n]
