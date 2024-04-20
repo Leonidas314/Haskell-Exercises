@@ -111,6 +111,10 @@ prefix [] ys = True
 prefix (x:xs) [] = False
 prefix (x:xs) (y:ys) = x==y && prefix xs ys
 
+prefix' :: String -> String -> Bool
+prefix' [] _ = True
+prefix' (x:xs) (y:ys) = x == y && prefix' xs ys
+
 --1.17 Write a function  substring :: String -> String -> Bool that checks wheter str1 is a substring of str2 
 {-The substring  of an arbitrary string ys  are given by :
 1. if xs is a prefix of ys , xs is a substring
