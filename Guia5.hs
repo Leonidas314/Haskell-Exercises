@@ -1,9 +1,8 @@
 {-Programación funcional, listas por comprensión, funciones de alto orden-}
--- Ejercicio1 Generar una lista infinita de unos
 
+-- Ejercicio1 Generar una lista infinita de unos
 -- [1,1..] Es una respuesta válida
 ----Otra respuesta es:
-
 linf :: [Int]
 linf = 1:linf
 
@@ -18,7 +17,6 @@ linfNat' n = [n]++ linfNat'(n+1)
 listnNat :: Int -> [Int]
 listnNat n = [0..n]
 
-
 --Ejercicio 4 *: Retorna los primeros 5 elementos de una lista infinita de enteros positivos
 primerosNelem :: Int -> Int -> [Int]
 primerosNelem m n = take n (linfNat m)
@@ -30,13 +28,16 @@ listSquare :: [Int] -> [Int]
 listSquare [] = []
 listSquare xs = map (^2) xs
 
-
+--Ejercicio 6 :Dado un poditivo , retornar la lista de sus divisores:
+--Por listas de comprension
 listDiv :: Int -> [Int]
 listDiv n = [x | x <- [1..n], mod n x == 0]
---
+--Por funciones de alto orden 
 fdiv:: Int-> [Int]
 fdiv 0=[0]
 fdiv n = filter (filtro n) [1..n] where filtro x n = mod x n == 0
+
+
 --Ejercicio 7 Dada una lista devolver una lista solo con los numeros primos de la original
 
 esPrimo :: Int -> Bool
@@ -45,23 +46,24 @@ esPrimo n = [x | x <- [2..n] , mod n x == 0] == [n]
 filterPrime :: [Int]-> [Int]
 filterPrime xs = filter (esPrimo) xs
 
---Ejercicio9 Dada un lista de naturales retornar una lista co sus succ
-
-succList :: [Int ]-> [Int]
-succList []= []
-succList xs = map (+1) xs
-
 
 --Ejercicio8 Dada una lista de nats retornar la suma de los cuadrados
 
 sumSquare :: ([Int] -> [Int] )-> [Int] -> Int
 sumSquare lsqr xs = sum (lsqr xs)
 
+sumCuadFold :: [Int]-> Int 
+sumCuadFold xs = foldr (+) 0 (listSquare(xs)) 
+--Ejercicio9 Dada un lista de naturales retornar una lista co sus succ
+
+succList :: [Int ]-> [Int]
+succList []= []
+succList xs = map (+1) xs
+
 --Ejercicio 10 Dada una lista de enteros sumar todos sus elementos 
 
 sumElem :: [Int]-> Int
 sumElem []=0
-sumElem [x]=x
 sumElem (x:xs)= x + sumElem(xs)
 
 --Ejercicio11 Definir el factorial usando fold
@@ -71,7 +73,7 @@ factFoldr n = foldr (*) (1) ([1..n])
 --foldl
 factFoldl :: Int -> Int
 factFoldl n = foldl (*) 1 [1..n]
---El producto es asociativo y conumtativo entonces el resultado es el mismo
+--El producto es asociativo y conumtativo entonces el resultado es el mismo con foldr que con foldl
 
 --Ejercicio12 Definir una funcion "and" tal que and xs verifique si todos los elementos de xs son verdaderos
 
@@ -111,7 +113,6 @@ succList' xs = [x+1 | x <- xs, even x]
 
 squareComprension :: [Int]->[Int]
 squareComprension xs =[n^2|n<-xs]
---Ejercicio6 Dado un entero positivo retornar una lista con sus divisores 
 
 --Ejercicio16 Dada una lista de enteros retornar los elementos pares que sean mayores a 10 
 
@@ -124,12 +125,8 @@ listEventen xs = [n | n <- xs , even n ,n>10 ]
 divisoresN :: Int -> [Int]
 divisoresN n = [x | x <- [1..n], mod n x==0]
 
---Ejercicio18 Definir la funcion 
---todosOcurrenEn :: Eq a => [a] -> [a] -> Bool
---tal que todosOcurrenEn xs ys se verifica si todos los elementos de xs son elementos de ys 
---todosOcurrenEn [1,5,2,5] [5,1,2,4] = True
---todosOcurrenEn [1,5,2,5] [5,2,4] = False
-
+--Ejercicio18 Definir la funcion todosOcurrenEn :: Eq a => [a] -> [a] -> Bool
+--Por Especificacion y derivacion obtuvimos:
 
 existElem :: Eq a => a -> [a] -> Bool
 existElem _ []= False
@@ -138,3 +135,5 @@ existElem x (y:ys) = (x==y) || existElem x ys
 toEn :: Eq a => [a] -> [a] -> Bool
 toEn [] _ = True 
 toEn (x:xs) (ys) = existElem x ys && toEn xs ys 
+
+--19 Dado un numero natural n, retornar los números primos comprendidos entre 2 y n.
