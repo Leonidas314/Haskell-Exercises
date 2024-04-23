@@ -39,7 +39,8 @@ fdiv n = filter (filtro n) [1..n] where filtro x n = mod x n == 0
 
 
 --Ejercicio 7 Dada una lista devolver una lista solo con los numeros primos de la original
-
+--Esta funcion genera una lista con los numeros comprendidos entre el 2 y los divisores de n
+--Si la lista generada es igual a la lista conformada solo por n, entonces n es primo.
 esPrimo :: Int -> Bool
 esPrimo n = [x | x <- [2..n] , mod n x == 0] == [n] 
 
@@ -56,7 +57,7 @@ sumCuadFold :: [Int]-> Int
 sumCuadFold xs = foldr (+) 0 (listSquare(xs)) 
 --Ejercicio9 Dada un lista de naturales retornar una lista co sus succ
 
-succList :: [Int ]-> [Int]
+succList :: [Int]-> [Int]
 succList []= []
 succList xs = map (+1) xs
 
@@ -137,3 +138,25 @@ toEn [] _ = True
 toEn (x:xs) (ys) = existElem x ys && toEn xs ys 
 
 --19 Dado un numero natural n, retornar los números primos comprendidos entre 2 y n.
+--Con la funcion esPrimo n = [x | x<-[2..n], mod n x == 0 ] == [n]
+primeList :: Int -> [Int]
+primeList n = [x | x <- [1..n] , esPrimo x]
+
+--Ejercicio 20: Dadas dos listas de naturales, retornar su producto cartesiano.
+
+cartUnitario :: Int -> [Int] -> [(Int,Int)]
+cartUnitario _ [] = []
+cartUnitario x (y:ys) = [(x,y)]++ cartUnitario x ys
+
+prodCart :: [Int] -> [Int] -> [(Int,Int)]
+prodCart [] _ = []
+prodCart _ [] = []
+prodCart (x:xs) (y:ys) = cartUnitario x (y:ys) ++ prodCart (xs) (y:ys)
+
+--Ejercicio21 Dada una lista y un elemento retornar la cantidad de ocurrencias del elemento x en la lista ys
+ocurrX :: Eq a => a -> [a] -> Int
+ocurrX _ [] = 0
+ocurrX x (y:ys) = equal y x + ocurrX x ys where equal y x = if x==y then 1 else 0 
+
+
+--Ejercicio 22 Escribir una funcion split2 :: [a] -> [([a],[a])], que dada una lista xs devuelve la lista con todas las formas de partir xs en dos
