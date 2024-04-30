@@ -160,3 +160,17 @@ ocurrX x (y:ys) = equal y x + ocurrX x ys where equal y x = if x==y then 1 else 
 
 
 --Ejercicio 22 Escribir una funcion split2 :: [a] -> [([a],[a])], que dada una lista xs devuelve la lista con todas las formas de partir xs en dos
+
+split2 :: [a] -> [([a],[a])]
+split2 [] = [([],[])]
+split2 xs = [(take i xs , drop i xs)| i <-[0..length xs]]
+
+--Ejercicio23 : Definir una funcion que dada una lista de enteros retorne la suma de la suma de todos los segmentos iniciales 
+--Por Ejemplo sumaSeg [1,2,3] = 0 + 1 + 2 + 3 + 6 = 10
+
+sumaSeg :: [Int] -> Int
+sumaSeg xs = sum [sum(take i xs) | i <- [0..length xs]]
+
+--Ejercicio 24 : Definir la lista infinita de los pares
+linfpar :: [Int]
+linfpar = [x | x<- (map (*2) [0,1..])]
