@@ -1,4 +1,5 @@
 
+
 --Programas calculados por derivacion
 ----Ejercicio18 Definir la funcion 
 --todosOcurrenEn :: Eq a => [a] -> [a] -> Bool
@@ -14,6 +15,7 @@ toEn :: Eq a => [a] -> [a] -> Bool
 toEn [] _ = True 
 toEn (x:xs) (ys) = existElem x ys && toEn xs ys 
 
+--Definir prefijo
 
 prefijo :: String -> String -> Bool
 prefijo [] _ = True
