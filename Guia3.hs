@@ -75,7 +75,7 @@ distanciaH [] [] = 0
 distanciaH xs [] = 0
 distanciaH [] ys = 0
 distanciaH (x:xs) (y:ys) 
- |x == y = 1 + distanciaH [] []
+ |x == y = 1 
  |otherwise = 1 + distanciaH xs ys 
 
  --Exercise 7 Define la funcion que dado un número natural, decida si el mismo es un cuadrado perfecto o no
