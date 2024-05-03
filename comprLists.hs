@@ -67,5 +67,19 @@ takeAndDrop j xs
  |j < length xs = take j xs
  |j > length xs = drop (j-length xs) xs
 
+--Solo funciona con una lista de 3 elementos
 split3 :: Eq a => [a] -> [([a],[a],[a])]
-split3 xs = [(take i xs,takeAndDrop j xs,drop i xs) | i <- [0..length xs], j<-[0..2*length xs], j==i || j == 2*i]
+split3 xs = [(as,bs,cs)| (as , ys) <- split2 xs, (bs,cs) <- split2 ys]
+--Crear una funcion que orden una lista de enteros de forma creciente con listas por comprension y con definiciones locales
+
+sortLocaly :: [Int] -> [Int]
+sortLocaly [] = []
+sortLocaly (xs) = [minInt (xs)] ++ sortLocaly (rmMin xs) 
+                        where 
+                        minInt [y]=y
+                        minInt (y:ys) = min y (minInt ys)
+                        rmMin []=[]
+                        rmMin ys = [z | z<- ys , z/=minInt ys]
+
+sortBycomprehension :: [Int] -> [Int]
+sortBycomprehension xs = [x | x <- xs ,y<-xs,all (<=y) xs] 
