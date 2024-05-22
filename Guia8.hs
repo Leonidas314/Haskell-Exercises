@@ -103,3 +103,6 @@ endingSubseg xs ys = any (==ys) [ cs | (as,bs,cs)<-split3 xs]
 maxsumsec :: [Int] -> Int
 maxsumsec xs =maxList [sum bs | (as,bs,cs)<-split3 xs] where maxList [x] = x
                                                              maxList (x:xs) = max x (maxList xs)
+
+split4 :: [a] -> [([a],[a],[a],[a])]
+split4 xs = [(as,bs,cs,ds) | (as,ys)<-split2 xs, (bs,cs,ds)<-split3 ys]                                                             

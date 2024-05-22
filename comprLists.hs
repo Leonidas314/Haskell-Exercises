@@ -83,3 +83,7 @@ sortLocaly (xs) = [minInt (xs)] ++ sortLocaly (rmMin xs)
 
 sortBycomprehension :: [Int] -> [Int]
 sortBycomprehension xs = [x | x <- xs ,y<-xs,all (<=y) xs] 
+
+quicksort [] = []
+quicksort [x] [x]
+quicksort (x:xs)= [y | y <- xs , y<= x]++ [x] ++[y | y <- xs , y > x]

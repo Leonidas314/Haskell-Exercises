@@ -94,7 +94,9 @@ repetidos z n = z: repetidos z (n-1)
 nelem :: [a] -> Int -> a
 nelem [] _ = error "Lista Vacia"
 nelem (x:xs) 0 = x
-nelem (x:xs) n = nelem xs (n-1)
+nelem (x:xs) n 
+ | n >= length (x:xs) = error "Posicion invalida"
+ | otherwise = nelem xs (n-1)
 
 --Exercise 10 Define la funcion posicionesC tal que posicionesC xs c es la lista de las posiciones del caracter c een la cadena xs.
 
