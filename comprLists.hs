@@ -61,13 +61,6 @@ split2 xs = [(take i xs, drop i xs)| i <- [0.. length xs]]
 
 --Crear la funcion split3 que dada una lista devuelva todas las formas de partila en tres en una tri-upla
 
-takeAndDrop :: Eq a => Int -> [a] -> [a]
-takeAndDrop j xs 
- |j == 0 || j==length xs = []
- |j < length xs = take j xs
- |j > length xs = drop (j-length xs) xs
-
---Solo funciona con una lista de 3 elementos
 split3 :: Eq a => [a] -> [([a],[a],[a])]
 split3 xs = [(as,bs,cs)| (as , ys) <- split2 xs, (bs,cs) <- split2 ys]
 --Crear una funcion que orden una lista de enteros de forma creciente con listas por comprension y con definiciones locales
