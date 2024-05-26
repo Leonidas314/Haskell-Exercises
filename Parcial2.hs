@@ -1,4 +1,4 @@
---Ejercicio 1 : Utilizando la definicion de naturales vista en la materia ... Cual era ? definir una funcion que determine si  un natural es multiplo de tres o no.
+-Ejercicio 1 : Utilizando la definicion de naturales vista en la materia ... Cual era ? definir una funcion que determine si  un natural es multiplo de tres o no.
 
 data Nat = Zero | Succ Nat
 
