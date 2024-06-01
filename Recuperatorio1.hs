@@ -32,3 +32,22 @@ f [] = False
 f [x] = False
 f xs = and [xs !! i == sumarPrev xs i | i <-[1..length xs-1] ]
 
+abiertosIzq :: [Char] -> [Char]
+abiertosIzq [] = []
+abiertosIzq (x:xs) = if x == '(' then x : abiertosIzq xs else []
+
+cerradosDer :: [Char] -> [Char]
+cerradoDer [] = []
+cerradosDer [x] = if x == ')' then [x] else []
+cerradosDer (xs) = if last xs == ')' then (last xs) : cerradoDer (init xs) else []
+
+abiertos :: [Char] -> Int
+abiertos [] = 0
+abiertos (x:xs) = if x=='(' then 1 + (abiertos xs) else 0
+
+cerrados :: [Char]->Int
+cerrados [] = 0
+cerrados (x:xs) = if x == ')' then 1 +(cerrados xs) else 0
+
+bal :: [Char] -> Bool
+bal xs = abiertos (abiertosIzq xs) == cerrados (cerradoDer xs)
