@@ -1,4 +1,4 @@
-data Nat = Zero | Succ Nat deriving (Ord)
+data Nat = Zero | Succ Nat 
 
 sumNat :: Nat -> Nat -> Nat
 sumNat Zero m = m
@@ -42,15 +42,15 @@ instance Eq Nat where
     (==) (Succ m) (Succ n ) = m == n 
     (==) _ _ = False
     --Not need to define unequal (/=), this will work just defining (==)
---instance Ord Nat where 
---    (<=) Zero Zero = True 
---    (<=) Zero (Succ Zero)= True
---    (<=) _  Zero = False 
---    (<=) (Succ n) (Succ m) = n <= m
---    (>) Zero Zero = False
---    (>) _ Zero = True 
---    (>) Zero _ = False
---    (>) (Succ n) (Succ m) = not (n <= m)
+instance Ord Nat where 
+    (<=) Zero Zero = True 
+    (<=) Zero (Succ Zero)= True
+    (<=) _  Zero = False 
+    (<=) (Succ n) (Succ m) = n <= m
+    (>) Zero Zero = False
+    (>) _ Zero = True 
+    (>) Zero _ = False
+    (>) (Succ n) (Succ m) = not (n <= m)
     --With this way is not need to define (>=)
 
 instance Show Nat where 
@@ -79,6 +79,15 @@ sumleaves :: (Num a) => (Tree a) -> a
 sumleaves Empty= 0
 sumleaves (Node n Empty Empty)= n
 sumleaves (Node _ left right)= (sumleaves left) + (sumleaves right)
+
+sumImpTree :: (Integral a) => (Eq a) => (Tree a) -> a
+sumImpTree Empty = 0
+sumImpTree (Node a left right) = if a`mod`2 /= 0 then a + ( sumImpTree left )+(sumImpTree right) else
+    (sumImpTree left + sumImpTree right)
+
+rev :: (Tree a) -> (Tree a)
+rev Empty = Empty
+rev (Node a left right) = (Node a (rev right) (rev left))
 
 instance (Eq a) => Eq (Tree a) where 
     (==) Empty Empty = True
@@ -140,6 +149,10 @@ tail' :: (List a) -> (List a)
 tail' Null = error "Lista Vacia" 
 tail' (Cons a Null) = Null
 tail' (Cons a list) = list 
+
+long :: (List a) -> Int
+long Null = 0
+long (Cons a list) = 1 + (long list)
 
 concat' :: (List a) -> (List a) -> (List a)
 concat' Null Null = Null
